@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="container" style="height: 400px; min-width: 310px"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+      $.getJSON('https://www.highcharts.com/samples/data/aapl-c.json', function (data) {
+        // Create the chart
+        Highcharts.stockChart('container', {
+
+
+          rangeSelector: {
+            selected: 1
+          },
+
+          title: {
+            text: 'AAPL Stock Price'
+          },
+
+          series: [{
+            name: 'AAPL',
+            data: data,
+            tooltip: {
+              valueDecimals: 2
+            }
+          }]
+        });
+      });
+    </script>
+{% endblock %}

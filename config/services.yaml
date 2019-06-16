@@ -26,3 +26,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.command.update_exchange_rate_command:
+        class: App\Command\UpdateExchangeRateCommand
+        arguments: ['@doctrine']
+        tags:
+        - { name: console.command }
+
+    app.services.exchange_service:
+        class: App\Services\ExchangeService
+        arguments: ['@doctrine', '@serializer']

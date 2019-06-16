@@ -1,27 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="container" style="height: 400px; min-width: 310px"></div>
+  {% for currencyPair in currencyPairs %}
+    <div id="pair-{{ currencyPair.id }}" style="height: 400px; min-width: 310px"></div>
+  {% endfor %}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    {% for currencyPair in currencyPairs %}
     <script>
-      $.getJSON('https://www.highcharts.com/samples/data/aapl-c.json', function (data) {
+      $.getJSON('{{ url('get_rate_history', {id: currencyPair.id }) }}', function (data) {
         // Create the chart
-        Highcharts.stockChart('container', {
-
+        Highcharts.stockChart('pair-{{ currencyPair.id }}', {
 
           rangeSelector: {
             selected: 1
           },
 
           title: {
-            text: 'AAPL Stock Price'
+            text: '{{ currencyPair.name }}'
           },
 
           series: [{
-            name: 'AAPL',
+            name: '{{ currencyPair.code }}',
             data: data,
             tooltip: {
               valueDecimals: 2
@@ -30,4 +32,5 @@
         });
       });
     </script>
+    {% endfor %}
 {% endblock %}

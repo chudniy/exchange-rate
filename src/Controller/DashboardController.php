@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CurrencyPair;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DashboardController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", methods={"GET"})
      * @Template()
      */
     public function indexAction()
     {
-        return [];
+        $em = $this->getDoctrine()->getManager();
+        $currencyPairs = $em->getRepository(CurrencyPair::class)->findAll();
+        
+        return [
+            'currencyPairs' => $currencyPairs,
+        ];
     }
 }

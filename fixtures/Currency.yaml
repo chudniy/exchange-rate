@@ -1,0 +1,12 @@
+App\Entity\Currency:
+  currency_1:
+    name: 'Bitcoin'
+    code: 'BTC'
+
+  currency_2:
+    name: 'US Dollar'
+    code: 'USD'
+
+  currency_3:
+    name: 'Euro'
+    code: 'EUR'

@@ -1,0 +1,8 @@
+App\Entity\CurrencyPair:
+  currency_pair_1:
+    source: '@currency_1'
+    target: '@currency_2'
+
+  currency_pair_2:
+    source: '@currency_1'
+    target: '@currency_3'
